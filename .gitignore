@@ -3,6 +3,9 @@
 .xcodebuildmcp
 .claude
 
+build/
+scripts/.env
+
 ### macOS ###
 # General
 .DS_Store

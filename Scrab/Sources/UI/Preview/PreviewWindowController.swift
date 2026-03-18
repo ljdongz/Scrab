@@ -4,7 +4,7 @@ import SwiftUI
 class PreviewWindowController {
   private var window: NSWindow?
   private var eventMonitor: Any?
-  private let item: CaptureItem
+  let item: CaptureItem
   private let onDelete: () -> Void
   private let onClose: () -> Void
 
@@ -99,6 +99,12 @@ class PreviewWindowController {
       context.duration = 0.2
       window.animator().alphaValue = 1
     }
+  }
+
+  func bringToFront() {
+    guard let window else { return }
+    NSApp.activate(ignoringOtherApps: true)
+    window.makeKeyAndOrderFront(nil)
   }
 
   private func dismiss() {

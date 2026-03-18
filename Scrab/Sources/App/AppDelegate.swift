@@ -53,6 +53,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   private func openPreview(for item: CaptureItem) {
+    if let existing = previewControllers.first(where: { $0.item.id == item.id }) {
+      existing.bringToFront()
+      return
+    }
+
     thumbnailController?.handleStoreChange()
     var controller: PreviewWindowController?
     controller = PreviewWindowController(

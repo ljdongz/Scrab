@@ -23,17 +23,10 @@ class SettingsManager {
   }
 
   var launchAtLogin: Bool {
-    get {
-      #if DEBUG
-      return false
-      #else
-      return SMAppService.mainApp.status == .enabled
-      #endif
-    }
-    set {
+    didSet {
       #if !DEBUG
       do {
-        if newValue {
+        if launchAtLogin {
           try SMAppService.mainApp.register()
         } else {
           try SMAppService.mainApp.unregister()
@@ -49,5 +42,6 @@ class SettingsManager {
     savePath = UserDefaults.standard.string(forKey: "savePath") ?? "~/Desktop"
     newestFirst = UserDefaults.standard.object(forKey: "newestFirst") as? Bool ?? true
     captureSoundEnabled = UserDefaults.standard.object(forKey: "captureSoundEnabled") as? Bool ?? true
+    launchAtLogin = SMAppService.mainApp.status == .enabled
   }
 }

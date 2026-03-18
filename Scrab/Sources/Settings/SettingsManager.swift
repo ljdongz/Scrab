@@ -24,9 +24,14 @@ class SettingsManager {
 
   var launchAtLogin: Bool {
     get {
-      SMAppService.mainApp.status == .enabled
+      #if DEBUG
+      return false
+      #else
+      return SMAppService.mainApp.status == .enabled
+      #endif
     }
     set {
+      #if !DEBUG
       do {
         if newValue {
           try SMAppService.mainApp.register()
@@ -36,6 +41,7 @@ class SettingsManager {
       } catch {
         print("Launch at login error: \(error)")
       }
+      #endif
     }
   }
 

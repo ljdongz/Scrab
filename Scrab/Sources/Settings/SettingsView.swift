@@ -39,9 +39,11 @@ struct SettingsView: View {
         Toggle("캡처 효과음", isOn: $settings.captureSoundEnabled)
       }
 
+      #if !DEBUG
       Section("시스템") {
         Toggle("로그인 시 자동 실행", isOn: $settings.launchAtLogin)
       }
+      #endif
     }
     .formStyle(.grouped)
     .frame(width: 450, height: 450)

@@ -38,6 +38,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         guard let self else { return }
         if let url = CaptureFileManager.save(item) {
           captureStore.markSaved(item, url: url)
+          if let updated = captureStore.items.first(where: { $0.id == item.id }) {
+            CaptureService.copyToClipboard(updated)
+          }
         }
       },
       onSaveAll: { [weak self] in
@@ -53,8 +56,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func startCapture() {
     captureService.capture { [weak self] item in
-      guard let self, let item else { return }
+      guard let self, var item else { return }
+      if let tempURL = CaptureFileManager.saveAsTemp(item) {
+        item.tempFileURL = tempURL
+        NotificationCenter.default.post(name: .tempFilesChanged, object: nil)
+      }
       captureStore.add(item)
+      CaptureService.copyToClipboard(item)
       thumbnailController?.showPanel()
     }
   }

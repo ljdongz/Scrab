@@ -7,6 +7,7 @@ struct CaptureItem: Identifiable {
   let imageHeight: Int
   let createdAt: Date = Date()
   var savedFileURL: URL?
+  var tempFileURL: URL?
 
   var filename: String {
     let formatter = DateFormatter()

@@ -34,7 +34,7 @@ struct ThumbnailCardView: View {
               .foregroundStyle(.white)
           }
           .buttonStyle(.plain)
-          
+
           Button(action: { onClose?() }) {
             Image(.delete)
               .resizable()
@@ -83,7 +83,7 @@ struct ThumbnailCardView: View {
       let provider = NSItemProvider()
       let dragComplete = onDragComplete
 
-      if let fileURL = item.savedFileURL {
+      if let fileURL = item.savedFileURL ?? item.tempFileURL {
         provider.registerDataRepresentation(forTypeIdentifier: UTType.fileURL.identifier, visibility: .all) { completion in
           completion(fileURL.dataRepresentation, nil)
           DispatchQueue.main.async { dragComplete?() }
@@ -94,8 +94,11 @@ struct ThumbnailCardView: View {
       if let data = item.pngData() {
         provider.registerDataRepresentation(forTypeIdentifier: UTType.png.identifier, visibility: .all) { completion in
           completion(data, nil)
-          if item.savedFileURL == nil {
-            DispatchQueue.main.async { dragComplete?() }
+          DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .tempFilesChanged, object: nil)
+            if item.savedFileURL == nil && item.tempFileURL == nil {
+              dragComplete?()
+            }
           }
           return nil
         }

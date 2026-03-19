@@ -3,6 +3,7 @@ import KeyboardShortcuts
 
 struct SettingsView: View {
   @Bindable private var settings = SettingsManager.shared
+  @State private var tempFileInfo = CaptureFileManager.tempFilesInfo()
 
   var body: some View {
     Form {
@@ -39,6 +40,20 @@ struct SettingsView: View {
         Toggle("Capture sound", isOn: $settings.captureSoundEnabled)
       }
 
+      Section("Temporary Files") {
+        HStack {
+          Text(
+            "\(tempFileInfo.count) file(s), \(ByteCountFormatter.string(fromByteCount: tempFileInfo.totalSize, countStyle: .file))"
+          )
+          Spacer()
+          Button("Clear") {
+            CaptureFileManager.clearAllTempFiles()
+            CaptureFileManager.clearDragCache()
+            tempFileInfo = CaptureFileManager.tempFilesInfo()
+          }
+        }
+      }
+
       #if !DEBUG
       Section("System") {
         Toggle("Launch at login", isOn: $settings.launchAtLogin)
@@ -47,5 +62,9 @@ struct SettingsView: View {
     }
     .formStyle(.grouped)
     .frame(width: 450, height: 450)
+    .onAppear { tempFileInfo = CaptureFileManager.tempFilesInfo() }
+    .onReceive(NotificationCenter.default.publisher(for: .tempFilesChanged)) { _ in
+      tempFileInfo = CaptureFileManager.tempFilesInfo()
+    }
   }
 }

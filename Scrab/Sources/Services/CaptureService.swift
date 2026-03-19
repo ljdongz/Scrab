@@ -50,13 +50,20 @@ final class CaptureService {
 
   // MARK: - Clipboard
 
-  /// Copies the given capture item to the system clipboard as both NSImage and PNG data.
+  /// Copies the given capture item to the system clipboard as PNG data and, if available,
+  /// the temporary file URL so that terminals receive a pasteable file path.
   static func copyToClipboard(_ item: CaptureItem) {
     let pasteboard = NSPasteboard.general
     pasteboard.clearContents()
-    pasteboard.writeObjects([item.image])
+
+    let pasteboardItem = NSPasteboardItem()
     if let pngData = item.pngData() {
-      pasteboard.setData(pngData, forType: .png)
+      pasteboardItem.setData(pngData, forType: .png)
     }
+    if let fileURL = item.savedFileURL ?? item.tempFileURL {
+      pasteboardItem.setData(
+        fileURL.absoluteString.data(using: .utf8)!, forType: .fileURL)
+    }
+    pasteboard.writeObjects([pasteboardItem])
   }
 }

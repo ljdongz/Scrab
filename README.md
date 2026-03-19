@@ -60,21 +60,6 @@ The capture shortcut can be customized in Settings.
 | Capture Sound | Play sound on capture | On |
 | Launch at Login | Start Scrab on login | Off |
 
-## Build from Source
-
-```bash
-git clone https://github.com/ljdongz/Scrab.git
-cd Scrab
-open Scrab.xcodeproj
-```
-
-Build and run with Xcode (requires Xcode 16+).
-
-### Dependencies (via Swift Package Manager)
-
-- [Sparkle](https://github.com/sparkle-project/Sparkle) — Auto-update framework
-- [KeyboardShortcuts](https://github.com/sindresorhus/KeyboardShortcuts) — Global hotkey management
-
 ## License
 
 MIT

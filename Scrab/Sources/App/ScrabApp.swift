@@ -25,6 +25,7 @@ struct ScrabApp: App {
       appDelegate.updaterController.checkForUpdates(nil)
     }
     Button("Settings...") {
+      appDelegate.moveSettingsToMouseScreen()
       openSettings()
       NSApp.activate(ignoringOtherApps: true)
     }

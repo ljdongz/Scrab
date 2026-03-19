@@ -10,6 +10,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   private let captureService = CaptureService()
   private var thumbnailController: ThumbnailPanelController?
   private var previewControllers: [PreviewWindowController] = []
+  private weak var settingsWindow: NSWindow?
 
   override init() {
     updaterController = SPUStandardUpdaterController(
@@ -70,6 +71,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   func openSettings() {
     NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
     NSApp.activate(ignoringOtherApps: true)
+    moveSettingsToMouseScreen()
+  }
+
+  func moveSettingsToMouseScreen() {
+    // 이미 열린 적 있는 윈도우는 보여주기 전에 미리 이동
+    if let window = settingsWindow {
+      moveToMouseScreen(window)
+    }
+
+    // 처음 열릴 때는 async로 캡처 후 이동
+    DispatchQueue.main.async { [weak self] in
+      guard let self, let window = NSApp.keyWindow else { return }
+      self.settingsWindow = window
+
+      if !window.collectionBehavior.contains(.moveToActiveSpace) {
+        window.collectionBehavior.insert(.moveToActiveSpace)
+      }
+
+      self.moveToMouseScreen(window)
+    }
+  }
+
+  private func moveToMouseScreen(_ window: NSWindow) {
+    guard let mouseScreen = NSScreen.screens.first(where: {
+            NSMouseInRect(NSEvent.mouseLocation, $0.frame, false)
+          }),
+          window.screen != mouseScreen else { return }
+
+    let visible = mouseScreen.visibleFrame
+    let x = visible.midX - window.frame.width / 2
+    let y = visible.midY - window.frame.height / 2
+    window.setFrameOrigin(NSPoint(x: x, y: y))
   }
 
   private func openPreview(for item: CaptureItem) {

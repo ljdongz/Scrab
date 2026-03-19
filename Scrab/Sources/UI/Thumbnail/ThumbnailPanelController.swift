@@ -125,7 +125,7 @@ class ThumbnailPanelController {
     panel.backgroundColor = .clear
     panel.isOpaque = false
     panel.hasShadow = false
-    panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle]
+    panel.collectionBehavior = [.moveToActiveSpace, .fullScreenAuxiliary, .stationary, .ignoresCycle]
     self.panel = panel
 
     moveObserver = NotificationCenter.default.addObserver(

@@ -3,12 +3,12 @@
     <channel>
         <title>Scrab</title>
         <item>
-            <title>1.0.2</title>
-            <pubDate>Thu, 19 Mar 2026 13:51:51 +0900</pubDate>
+            <title>1.1.0</title>
+            <pubDate>Thu, 19 Mar 2026 13:56:44 +0900</pubDate>
             <sparkle:version>1</sparkle:version>
-            <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+            <sparkle:shortVersionString>1.1.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/ljdongz/Scrab/releases/download/v1.1.0/Scrab-1.1.0.zip" length="3472002" type="application/octet-stream" sparkle:edSignature="z3ucpRlFIf8ksCCOexgwG6fZiNeshPFzMrRsNYPM4vu2B5KGSD1ejztw9vl9QGG/MeXfezqxK0tHYxM6v4wTCw=="/>
+            <enclosure url="https://github.com/ljdongz/Scrab/releases/download/v1.1.0/Scrab-1.1.0.zip" length="3471995" type="application/octet-stream" sparkle:edSignature="stHBZPYQ7SDvtV5Ok0NUHno0y6g+FUg4RahkSzTJMhcqv1TYHfwEGT5C+kbae5uCPcPKYo+Y1janItjnE0MiAQ=="/>
         </item>
     </channel>
 </rss>

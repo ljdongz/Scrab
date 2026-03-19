@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57F425F12F4ACDCC005421FB /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = 57F425F02F4ACDCC005421FB /* KeyboardShortcuts */; };
+		57F97CED2F6B706300161ADB /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 57F97CEC2F6B706300161ADB /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57F425F12F4ACDCC005421FB /* KeyboardShortcuts in Frameworks */,
+				57F97CED2F6B706300161ADB /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,6 +75,7 @@
 			name = Scrab;
 			packageProductDependencies = (
 				57F425F02F4ACDCC005421FB /* KeyboardShortcuts */,
+				57F97CEC2F6B706300161ADB /* Sparkle */,
 			);
 			productName = Scrab;
 			productReference = 57F425E12F4ACD88005421FB /* [Debug] Scrab.app */;
@@ -104,6 +107,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				57F425EF2F4ACDCC005421FB /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				57F97CEB2F6B706300161ADB /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 57F425E22F4ACD88005421FB /* Products */;
@@ -268,7 +272,7 @@
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
-				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
@@ -280,6 +284,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "[Debug] Scrab";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -314,7 +319,7 @@
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
-				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
 				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
@@ -326,6 +331,7 @@
 				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "[Debug] Scrab";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -380,6 +386,14 @@
 				minimumVersion = 2.4.0;
 			};
 		};
+		57F97CEB2F6B706300161ADB /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -387,6 +401,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57F425EF2F4ACDCC005421FB /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
+		};
+		57F97CEC2F6B706300161ADB /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57F97CEB2F6B706300161ADB /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

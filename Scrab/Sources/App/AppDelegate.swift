@@ -1,12 +1,24 @@
 import AppKit
+import Sparkle
 import SwiftUI
 
 class AppDelegate: NSObject, NSApplicationDelegate {
+  let updaterController: SPUStandardUpdaterController
+
   private var hotkeyManager: GlobalHotkeyManager?
   let captureStore = CaptureStore()
   private let captureService = CaptureService()
   private var thumbnailController: ThumbnailPanelController?
   private var previewControllers: [PreviewWindowController] = []
+
+  override init() {
+    updaterController = SPUStandardUpdaterController(
+      startingUpdater: true,
+      updaterDelegate: nil,
+      userDriverDelegate: nil
+    )
+    super.init()
+  }
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     hotkeyManager = GlobalHotkeyManager()

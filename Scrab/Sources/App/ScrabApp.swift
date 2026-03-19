@@ -5,6 +5,7 @@
 //  Created by 이정동 on 2/22/26.
 //
 
+import Sparkle
 import SwiftUI
 
 @main
@@ -20,9 +21,8 @@ struct ScrabApp: App {
     }
     .keyboardShortcut("s", modifiers: [.command, .shift])
     Divider()
-    Button("About Scrab") {
-      NSApp.activate(ignoringOtherApps: true)
-      NSApp.orderFrontStandardAboutPanel()
+    Button("Check for Updates...") {
+      appDelegate.updaterController.checkForUpdates(nil)
     }
     Button("Settings...") {
       openSettings()

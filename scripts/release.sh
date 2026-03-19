@@ -98,8 +98,43 @@ gh release create "v$VERSION" "$ZIP_PATH" \
 
 echo "    Release 생성 완료"
 
-# ─── 6. Homebrew Cask 업데이트 ───
-echo "==> 6/6 Homebrew Cask 업데이트 중..."
+# ─── 6. Sparkle appcast.xml 생성 (generate_appcast) ───
+echo "==> 6/8 appcast.xml 생성 중..."
+SPARKLE_BIN_DIR=$(find ~/Library/Developer/Xcode/DerivedData -path "*/sparkle/Sparkle/bin" -type d 2>/dev/null | head -1)
+if [ -z "$SPARKLE_BIN_DIR" ]; then
+  echo "    오류: Sparkle bin 디렉토리를 찾을 수 없습니다. Xcode에서 빌드 후 다시 시도하세요."
+  exit 1
+fi
+
+APPCAST_DIR="$BUILD_DIR/appcast"
+mkdir -p "$APPCAST_DIR"
+cp "$ZIP_PATH" "$APPCAST_DIR/"
+
+DOWNLOAD_URL_PREFIX="https://github.com/ljdongz/Scrab/releases/download/v$VERSION"
+"$SPARKLE_BIN_DIR/generate_appcast" "$APPCAST_DIR" \
+  --download-url-prefix "$DOWNLOAD_URL_PREFIX/"
+
+echo "    appcast.xml 생성 완료"
+
+# ─── 7. gh-pages에 appcast.xml push ───
+echo "==> 7/8 gh-pages에 appcast.xml 배포 중..."
+GH_PAGES_DIR="$BUILD_DIR/gh-pages"
+git worktree add "$GH_PAGES_DIR" gh-pages 2>/dev/null || {
+  git branch gh-pages 2>/dev/null || true
+  git worktree add "$GH_PAGES_DIR" gh-pages
+}
+cp "$APPCAST_DIR/appcast.xml" "$GH_PAGES_DIR/appcast.xml"
+cd "$GH_PAGES_DIR"
+git add appcast.xml
+git commit -m "Update appcast.xml for v$VERSION" || true
+git push origin gh-pages
+cd "$PROJECT_DIR"
+git worktree remove "$GH_PAGES_DIR" --force
+
+echo "    appcast.xml 배포 완료"
+
+# ─── 8. Homebrew Cask 업데이트 ───
+echo "==> 8/8 Homebrew Cask 업데이트 중..."
 SHA256=$(shasum -a 256 "$ZIP_PATH" | awk '{print $1}')
 
 sed -i '' "s/version \".*\"/version \"$VERSION\"/" "$CASK_FILE"

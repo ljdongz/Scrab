@@ -95,9 +95,7 @@ class ThumbnailPanelController {
       createPanel()
     }
     setupContentIfNeeded()
-    if isNew {
-      positionPanel()
-    }
+    positionPanel()
     panel?.alphaValue = 1
     panel?.orderFront(nil)
   }
@@ -171,7 +169,10 @@ class ThumbnailPanelController {
   }
 
   private func positionPanel() {
-    guard let panel = panel, let screen = NSScreen.main else { return }
+    guard let panel = panel,
+          let screen = NSScreen.screens.first(where: {
+            NSMouseInRect(NSEvent.mouseLocation, $0.frame, false)
+          }) ?? NSScreen.main else { return }
     let padding = VerticalOnlyPanel.edgePadding
     let visible = screen.visibleFrame
     let x = screen.frame.maxX - Self.panelWidth - padding

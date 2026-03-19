@@ -175,7 +175,13 @@ class ThumbnailPanelController {
           }) ?? NSScreen.main else { return }
     let padding = VerticalOnlyPanel.edgePadding
     let visible = screen.visibleFrame
-    let x = screen.frame.maxX - Self.panelWidth - padding
+    let x: CGFloat
+    switch SettingsManager.shared.widgetPosition {
+    case .left:
+      x = visible.minX + padding
+    case .right:
+      x = visible.maxX - Self.panelWidth - padding
+    }
     let minY = visible.minY + padding
     let maxY = visible.maxY - Self.panelHeight - padding
 

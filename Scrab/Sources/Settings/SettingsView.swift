@@ -36,6 +36,14 @@ struct SettingsView: View {
         .pickerStyle(.segmented)
       }
 
+      Section("Thumbnail Position") {
+        Picker("Screen side", selection: $settings.widgetPosition) {
+          Text("Left").tag(WidgetPosition.left)
+          Text("Right").tag(WidgetPosition.right)
+        }
+        .pickerStyle(.segmented)
+      }
+
       Section("Capture") {
         Toggle("Capture sound", isOn: $settings.captureSoundEnabled)
       }

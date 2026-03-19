@@ -15,22 +15,22 @@ struct ScrabApp: App {
 
   @ViewBuilder
   private var menuContent: some View {
-    Button("캡처") {
+    Button("Capture") {
       appDelegate.startCapture()
     }
     .keyboardShortcut("s", modifiers: [.command, .shift])
     Divider()
-    Button("Scrab에 관하여") {
+    Button("About Scrab") {
       NSApp.activate(ignoringOtherApps: true)
       NSApp.orderFrontStandardAboutPanel()
     }
-    Button("설정...") {
+    Button("Settings...") {
       openSettings()
       NSApp.activate(ignoringOtherApps: true)
     }
     .keyboardShortcut(",", modifiers: .command)
     Divider()
-    Button("종료") {
+    Button("Quit") {
       NSApplication.shared.terminate(nil)
     }
     .keyboardShortcut("q", modifiers: .command)

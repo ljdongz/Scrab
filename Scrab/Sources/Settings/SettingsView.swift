@@ -6,12 +6,12 @@ struct SettingsView: View {
 
   var body: some View {
     Form {
-      Section("저장 위치") {
+      Section("Save Location") {
         HStack {
-          TextField("저장 경로", text: $settings.savePath)
+          TextField("Save path", text: $settings.savePath)
             .textFieldStyle(.roundedBorder)
 
-          Button("찾아보기...") {
+          Button("Browse...") {
             let panel = NSOpenPanel()
             panel.canChooseDirectories = true
             panel.canChooseFiles = false
@@ -23,25 +23,25 @@ struct SettingsView: View {
         }
       }
 
-      Section("단축키") {
-        KeyboardShortcuts.Recorder("캡처 단축키:", name: .captureScreen)
+      Section("Shortcut") {
+        KeyboardShortcuts.Recorder("Capture shortcut:", name: .captureScreen)
       }
 
-      Section("썸네일 정렬") {
-        Picker("정렬 순서", selection: $settings.newestFirst) {
-          Text("최신순").tag(true)
-          Text("오래된순").tag(false)
+      Section("Thumbnail Order") {
+        Picker("Sort order", selection: $settings.newestFirst) {
+          Text("Newest first").tag(true)
+          Text("Oldest first").tag(false)
         }
         .pickerStyle(.segmented)
       }
 
-      Section("캡처") {
-        Toggle("캡처 효과음", isOn: $settings.captureSoundEnabled)
+      Section("Capture") {
+        Toggle("Capture sound", isOn: $settings.captureSoundEnabled)
       }
 
       #if !DEBUG
-      Section("시스템") {
-        Toggle("로그인 시 자동 실행", isOn: $settings.launchAtLogin)
+      Section("System") {
+        Toggle("Launch at login", isOn: $settings.launchAtLogin)
       }
       #endif
     }

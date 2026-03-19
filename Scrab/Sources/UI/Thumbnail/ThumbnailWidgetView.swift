@@ -12,11 +12,11 @@ struct ThumbnailWidgetView: View {
     VStack(spacing: 0) {
       // Header
       HStack {
-        Text("캡처 목록")
+        Text("Captures")
           .font(.system(size: 13, weight: .semibold))
           .foregroundStyle(DesignTokens.textPrimary)
         Spacer()
-        Text("\(store.items.count)개")
+        Text("\(store.items.count)")
           .font(.system(size: 11))
           .foregroundStyle(DesignTokens.textSecondary)
       }

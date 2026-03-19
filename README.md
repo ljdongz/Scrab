@@ -1,10 +1,18 @@
-<img width="100" height="100" alt="scrab" src="https://github.com/user-attachments/assets/ab6d7c67-248b-4cfa-97cc-37a273b39bdc" />
 
 # Scrab
 
-Lightweight macOS menu bar app for fast screen capture. Capture any area of your screen with a single shortcut, manage captures in a floating thumbnail widget, and drag-and-drop or save them wherever you need.
+<div align="center">
+
+<img width="100" height="100" alt="scrab" src="https://github.com/user-attachments/assets/ab6d7c67-248b-4cfa-97cc-37a273b39bdc" />
 
 [🇰🇷 한국어](docs/README_ko.md)
+
+Lightweight macOS menu bar app for fast screen capture. Capture any area of your screen with a single shortcut, manage captures in a floating thumbnail widget, and drag-and-drop or save them wherever you need.
+
+</div>
+
+https://github.com/user-attachments/assets/4363a532-b565-4b6e-8ce0-e9cda9d79dd6
+
 
 ## Table of Contents
 

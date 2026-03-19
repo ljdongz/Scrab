@@ -1,3 +1,5 @@
+<img width="100" height="100" alt="scrab" src="https://github.com/user-attachments/assets/ab6d7c67-248b-4cfa-97cc-37a273b39bdc" />
+
 # Scrab
 
 Lightweight macOS menu bar app for fast screen capture. Capture any area of your screen with a single shortcut, manage captures in a floating thumbnail widget, and drag-and-drop or save them wherever you need.
@@ -10,7 +12,6 @@ Lightweight macOS menu bar app for fast screen capture. Capture any area of your
 - **Drag & Drop** — Drag thumbnails directly into other apps (Slack, Finder, etc.)
 - **Clipboard Integration** — Every capture is automatically copied to the clipboard
 - **Batch Actions** — Save all or delete all captures at once
-- **Auto Update** — Built-in Sparkle update support
 
 ## Requirements
 

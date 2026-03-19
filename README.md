@@ -41,15 +41,41 @@ brew update && brew upgrade scrab
 
 Scrab checks for updates automatically via Sparkle. You can also trigger a manual check from the menu bar icon > **Check for Updates**.
 
-## Keyboard Shortcuts
+## Usage
 
-| Action | Shortcut |
-|--------|----------|
-| Capture Screen | `⌘ Shift S` |
-| Settings | `⌘ ,` |
-| Quit | `⌘ Q` |
+### Capture
+
+Press `⌘ Shift S` to start a screen capture. Drag to select any area — the captured image is automatically copied to the clipboard and appears in the floating thumbnail widget.
+
+- **Paste as image** — `⌘ V` in Slack, Notes, or any image-accepting app to paste the capture
+- **Paste as file path** — `⌘ V` in Terminal to paste the temporary file path
 
 The capture shortcut can be customized in Settings.
+
+### Thumbnail Widget
+
+Captured images are listed in a floating sidebar with numbered badges.
+
+- **Click** a thumbnail to open the preview window
+- **Hover** to reveal save and delete buttons
+- **Drag & Drop** a thumbnail into other apps (Finder, Slack, etc.)
+- Use the bottom toolbar to **Save All** or **Delete All** at once
+
+### Preview Window
+
+Click any thumbnail to open a full-size viewer.
+
+- **Copy** — copy the image to the clipboard
+- **Save** — save to the configured directory
+- **Delete** — remove the capture
+
+### Saving
+
+Click the save button on a thumbnail or in the preview window. The image is saved as PNG to your configured save location (default: `~/Desktop`). After saving, `⌘ V` in Terminal will paste the saved file path instead of the temporary path.
+
+### Temporary File Cleanup
+
+Captured images and drag cache files accumulate over time. Open **Settings > Temporary Files** to see the current file count and size, then click **Clear** to remove them.
 
 ## Settings
 

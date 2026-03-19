@@ -43,7 +43,7 @@ struct ThumbnailWidgetView: View {
               onClose: { onItemClose?(item) },
               onClick: { onItemClick?(item) },
               onSave: { onItemSave?(item) },
-              onDragComplete: { onItemClose?(item) }
+              onDragComplete: nil
             )
           }
         }

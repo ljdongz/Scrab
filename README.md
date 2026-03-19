@@ -4,6 +4,8 @@
 
 Lightweight macOS menu bar app for fast screen capture. Capture any area of your screen with a single shortcut, manage captures in a floating thumbnail widget, and drag-and-drop or save them wherever you need.
 
+[🇰🇷 한국어](docs/README_ko.md)
+
 ## Table of Contents
 
 - [Features](#features)

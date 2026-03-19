@@ -1,8 +1,18 @@
-<img width="100" height="100" alt="scrab" src="https://github.com/user-attachments/assets/ab6d7c67-248b-4cfa-97cc-37a273b39bdc" />
 
 # Scrab
 
+<div align="center">
+
+<img width="100" height="100" alt="scrab" src="https://github.com/user-attachments/assets/ab6d7c67-248b-4cfa-97cc-37a273b39bdc" />
+
+
 빠른 화면 캡처를 위한 가벼운 macOS 메뉴 바 앱. 단축키 하나로 화면의 원하는 영역을 캡처하고, 플로팅 썸네일 위젯에서 관리하며, 드래그 앤 드롭 또는 저장할 수 있습니다.
+
+</div>
+
+
+https://github.com/user-attachments/assets/9f2b49a6-3579-4a62-bebe-98891c26dd8d
+
 
 ## 목차
 

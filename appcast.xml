@@ -4,11 +4,11 @@
         <title>Scrab</title>
         <item>
             <title>1.0.2</title>
-            <pubDate>Thu, 19 Mar 2026 09:33:38 +0900</pubDate>
+            <pubDate>Thu, 19 Mar 2026 13:51:51 +0900</pubDate>
             <sparkle:version>1</sparkle:version>
             <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/ljdongz/Scrab/releases/download/v1.0.2/Scrab-1.0.2.zip" length="3454502" type="application/octet-stream" sparkle:edSignature="j5MRVwqnsJmMeQrVzFiGSVVCewMsSv4mKXQnBSnHGASZdDyltqQUbZMI3OjbXBThKu0pLhjliddj2sWoySLaBw=="/>
+            <enclosure url="https://github.com/ljdongz/Scrab/releases/download/v1.1.0/Scrab-1.1.0.zip" length="3472002" type="application/octet-stream" sparkle:edSignature="z3ucpRlFIf8ksCCOexgwG6fZiNeshPFzMrRsNYPM4vu2B5KGSD1ejztw9vl9QGG/MeXfezqxK0tHYxM6v4wTCw=="/>
         </item>
     </channel>
 </rss>

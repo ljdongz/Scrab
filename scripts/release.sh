@@ -38,10 +38,24 @@ ARCHIVE_PATH="$BUILD_DIR/$APP_NAME.xcarchive"
 APP_PATH="$ARCHIVE_PATH/Products/Applications/$APP_NAME.app"
 ZIP_PATH="$BUILD_DIR/$APP_NAME-$VERSION.zip"
 
+PBXPROJ="$PROJECT_DIR/$PROJECT/project.pbxproj"
+
 echo "==> [$APP_NAME v$VERSION] 릴리스 시작"
 
+# ─── 0. 버전 & 빌드 넘버 업데이트 ───
+echo "==> 0/8 버전 & 빌드 넘버 업데이트 중..."
+CURRENT_BUILD=$(grep -m1 'CURRENT_PROJECT_VERSION' "$PBXPROJ" | sed 's/[^0-9]//g')
+NEW_BUILD=$((CURRENT_BUILD + 1))
+sed -i '' "s/MARKETING_VERSION = .*;/MARKETING_VERSION = $VERSION;/g" "$PBXPROJ"
+sed -i '' "s/CURRENT_PROJECT_VERSION = .*;/CURRENT_PROJECT_VERSION = $NEW_BUILD;/g" "$PBXPROJ"
+echo "    MARKETING_VERSION: $VERSION, BUILD: $CURRENT_BUILD → $NEW_BUILD"
+
+git -C "$PROJECT_DIR" add "$PBXPROJ"
+git -C "$PROJECT_DIR" commit -m "Bump version to $VERSION (build $NEW_BUILD)"
+git -C "$PROJECT_DIR" push
+
 # ─── 1. 빌드 ───
-echo "==> 1/6 빌드 중..."
+echo "==> 1/8 빌드 중..."
 xcodebuild \
   -project "$PROJECT_DIR/$PROJECT" \
   -scheme "$SCHEME" \
@@ -56,7 +70,7 @@ xcodebuild \
 echo "    빌드 완료"
 
 # ─── 2. 코드 서명 (안쪽 → 바깥쪽 순서) ───
-echo "==> 2/6 코드 서명 중..."
+echo "==> 2/8 코드 서명 중..."
 SPARKLE_FW="$APP_PATH/Contents/Frameworks/Sparkle.framework"
 
 # Sparkle 내부 XPC 서비스
@@ -81,7 +95,7 @@ codesign --force --options runtime --sign "$SIGN_IDENTITY" \
 echo "    서명 완료"
 
 # ─── 3. zip 압축 + 공증 ───
-echo "==> 3/6 공증 제출 중..."
+echo "==> 3/8 공증 제출 중..."
 ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
 
 xcrun notarytool submit "$ZIP_PATH" \
@@ -93,14 +107,14 @@ xcrun notarytool submit "$ZIP_PATH" \
 echo "    공증 완료"
 
 # ─── 4. Staple + zip 재생성 ───
-echo "==> 4/6 Staple 중..."
+echo "==> 4/8 Staple 중..."
 xcrun stapler staple "$APP_PATH"
 rm "$ZIP_PATH"
 ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
 echo "    Staple 완료"
 
 # ─── 5. GitHub Release ───
-echo "==> 5/6 GitHub Release 생성 중..."
+echo "==> 5/8 GitHub Release 생성 중..."
 cd "$PROJECT_DIR"
 
 # 기존 릴리스가 있으면 삭제

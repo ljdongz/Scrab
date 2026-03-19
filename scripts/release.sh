@@ -55,17 +55,34 @@ xcodebuild \
 
 echo "    빌드 완료"
 
-# ─── 2. 코드 서명 ───
+# ─── 2. 코드 서명 (안쪽 → 바깥쪽 순서) ───
 echo "==> 2/6 코드 서명 중..."
-codesign --deep --force --options runtime \
-  --sign "$SIGN_IDENTITY" \
+SPARKLE_FW="$APP_PATH/Contents/Frameworks/Sparkle.framework"
+
+# Sparkle 내부 XPC 서비스
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
+  "$SPARKLE_FW/Versions/B/XPCServices/Downloader.xpc"
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
+  "$SPARKLE_FW/Versions/B/XPCServices/Installer.xpc"
+
+# Sparkle 내부 실행 파일
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
+  "$SPARKLE_FW/Versions/B/Autoupdate"
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
+  "$SPARKLE_FW/Versions/B/Updater.app"
+
+# Sparkle 프레임워크
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
+  "$SPARKLE_FW"
+
+# 메인 앱
+codesign --force --options runtime --sign "$SIGN_IDENTITY" \
   "$APP_PATH"
 echo "    서명 완료"
 
 # ─── 3. zip 압축 + 공증 ───
 echo "==> 3/6 공증 제출 중..."
-cd "$(dirname "$APP_PATH")"
-zip -r -q "$ZIP_PATH" "$APP_NAME.app"
+ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
 
 xcrun notarytool submit "$ZIP_PATH" \
   --apple-id "$APPLE_ID" \
@@ -79,7 +96,7 @@ echo "    공증 완료"
 echo "==> 4/6 Staple 중..."
 xcrun stapler staple "$APP_PATH"
 rm "$ZIP_PATH"
-zip -r -q "$ZIP_PATH" "$APP_NAME.app"
+ditto -c -k --sequesterRsrc --keepParent "$APP_PATH" "$ZIP_PATH"
 echo "    Staple 완료"
 
 # ─── 5. GitHub Release ───

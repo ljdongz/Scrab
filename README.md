@@ -104,6 +104,7 @@ Captured images and drag cache files accumulate over time. Open **Settings > Tem
 | Save Location | Directory for saved captures | `~/Desktop` |
 | Capture Shortcut | Global hotkey for screen capture | `⌘ Shift S` |
 | Thumbnail Order | Newest first or oldest first | Newest first |
+| Thumbnail Position | Left or right side of the screen for the thumbnail widget | Right |
 | Capture Sound | Play sound on capture | On |
 | Launch at Login | Start Scrab on login | Off |
 

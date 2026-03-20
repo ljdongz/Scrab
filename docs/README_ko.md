@@ -104,6 +104,7 @@ Scrab은 Sparkle을 통해 자동으로 업데이트를 확인합니다. 메뉴 
 | Save Location | 캡처 저장 디렉토리 | `~/Desktop` |
 | Capture Shortcut | 화면 캡처 글로벌 단축키 | `⌘ Shift S` |
 | Thumbnail Order | 최신순 또는 오래된순 | 최신순 |
+| Thumbnail Position | 썸네일 위젯의 화면 좌측/우측 위치 | 우측 |
 | Capture Sound | 캡처 시 소리 재생 | 켜짐 |
 | Launch at Login | 로그인 시 Scrab 자동 실행 | 꺼짐 |
 

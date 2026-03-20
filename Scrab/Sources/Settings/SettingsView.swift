@@ -1,9 +1,11 @@
+import Sparkle
 import SwiftUI
 import KeyboardShortcuts
 
 struct SettingsView: View {
   @Bindable private var settings = SettingsManager.shared
   @State private var tempFileInfo = CaptureFileManager.tempFilesInfo()
+  let updater: SPUUpdater
 
   var body: some View {
     Form {
@@ -65,6 +67,10 @@ struct SettingsView: View {
 
       #if !DEBUG
       Section("System") {
+        Toggle("Automatically check for updates", isOn: Binding(
+          get: { updater.automaticallyChecksForUpdates },
+          set: { updater.automaticallyChecksForUpdates = $0 }
+        ))
         Toggle("Launch at login", isOn: $settings.launchAtLogin)
       }
       #endif

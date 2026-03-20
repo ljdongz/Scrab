@@ -49,7 +49,7 @@ struct ScrabApp: App {
     #endif
 
     Settings {
-      SettingsView()
+      SettingsView(updater: appDelegate.updaterController.updater)
     }
   }
 }

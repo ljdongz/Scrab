@@ -44,6 +44,7 @@ enum CaptureFileManager {
   static func deleteTempFile(for item: CaptureItem) {
     guard let url = item.tempFileURL else { return }
     try? FileManager.default.removeItem(at: url)
+    NotificationCenter.default.post(name: .tempFilesChanged, object: nil)
   }
 
   /// Removes all `Capture_*.png` files from the system temporary directory.

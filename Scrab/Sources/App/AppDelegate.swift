@@ -21,6 +21,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     super.init()
   }
 
+  func applicationWillTerminate(_ notification: Notification) {
+    CaptureFileManager.clearAllTempFiles()
+    CaptureFileManager.clearDragCache()
+  }
+
   func applicationDidFinishLaunching(_ notification: Notification) {
     hotkeyManager = GlobalHotkeyManager()
     hotkeyManager?.onCaptureTrigger = { [weak self] in

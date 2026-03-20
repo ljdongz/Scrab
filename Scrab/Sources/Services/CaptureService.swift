@@ -66,4 +66,22 @@ final class CaptureService {
     }
     pasteboard.writeObjects([pasteboardItem])
   }
+
+  /// If the clipboard references a temp capture file that no longer exists,
+  /// re-writes the clipboard with just the PNG image data.
+  static func refreshClipboardIfNeeded() {
+    let pasteboard = NSPasteboard.general
+    guard let urlString = pasteboard.string(forType: .fileURL),
+          let url = URL(string: urlString),
+          url.lastPathComponent.hasPrefix("Capture_"),
+          url.pathExtension == "png",
+          !FileManager.default.fileExists(atPath: url.path) else { return }
+
+    guard let imageData = pasteboard.data(forType: .png) else { return }
+
+    pasteboard.clearContents()
+    let item = NSPasteboardItem()
+    item.setData(imageData, forType: .png)
+    pasteboard.writeObjects([item])
+  }
 }

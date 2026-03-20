@@ -57,6 +57,7 @@ struct SettingsView: View {
           Button("Clear") {
             CaptureFileManager.clearAllTempFiles()
             CaptureFileManager.clearDragCache()
+            CaptureService.refreshClipboardIfNeeded()
             tempFileInfo = CaptureFileManager.tempFilesInfo()
           }
         }

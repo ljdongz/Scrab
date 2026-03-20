@@ -38,7 +38,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self?.openPreview(for: item)
       },
       onItemClose: { [weak self] item in
+        CaptureFileManager.deleteTempFile(for: item)
         self?.captureStore.remove(item)
+        CaptureService.refreshClipboardIfNeeded()
       },
       onItemSave: { [weak self] item in
         guard let self else { return }
@@ -55,7 +57,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         thumbnailController?.handleStoreChange()
       },
       onDeleteAll: { [weak self] in
+        self?.captureStore.items.forEach { CaptureFileManager.deleteTempFile(for: $0) }
         self?.captureStore.removeAll()
+        CaptureService.refreshClipboardIfNeeded()
       }
     )
   }
@@ -121,8 +125,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     controller = PreviewWindowController(
       item: item,
       onDelete: { [weak self] in
+        CaptureFileManager.deleteTempFile(for: item)
         self?.captureStore.remove(item)
         self?.thumbnailController?.handleStoreChange()
+        CaptureService.refreshClipboardIfNeeded()
       },
       onClose: { [weak self] in
         if let ctrl = controller {

@@ -40,6 +40,12 @@ enum CaptureFileManager {
     return fileURL
   }
 
+  /// Removes the temporary file associated with a single capture item.
+  static func deleteTempFile(for item: CaptureItem) {
+    guard let url = item.tempFileURL else { return }
+    try? FileManager.default.removeItem(at: url)
+  }
+
   /// Removes all `Capture_*.png` files from the system temporary directory.
   static func clearAllTempFiles() {
     let tempDir = FileManager.default.temporaryDirectory
